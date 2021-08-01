@@ -1,0 +1,34 @@
+<!doctype html>
+<head>
+	<title>Tabox Collections to Plain Text</title>
+	<style>
+	textarea{
+		-webkit-box-sizing: border-box;
+		-moz-box-sizing: border-box;
+		box-sizing: border-box;
+		width: 100%;
+		height: 100%;
+	}
+	</style>
+</head>
+<body>
+<h5>This converts <a href="https://tabox.co">Tabox</a> collections files to a plain text format so you can use it on <a href="https://chrome.google.com/webstore/detail/export-tabs/odafagokkafdbbeojliiojjmimakacil">Export Tabs</a>. I only made this tool for personal use because Tabox doesn't work properly on Kiwi Browser.</h5>
+<div><input type="file" accept=".txt, text/plain"/></div>
+<p></p>
+<textarea readonly></textarea>
+<script>
+	const res = [];
+	document.querySelector(`input[type="file"]`).onchange = (event) => {
+		const reader = new FileReader();
+		reader.onload = (ev) => {
+			const tabs = JSON.parse(ev.target.result);
+			for(let i = 0; i < Object.keys(tabs.tabs).length; i++){
+				res.push(tabs.tabs[i].url);
+			}
+			document.querySelector("textarea").value = res.join("\n");
+			document.querySelector("p").innerHTML = `Tabs converted: ${Object.keys(tabs.tabs).length}`;
+		}
+		reader.readAsText(event.target.files[0]);
+	}
+</script>
+</body>

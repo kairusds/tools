@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=yes">
+		<title>tools</title>
+		<style>
+			ul, li{
+				list-style: none;
+				margin: 0;
+				padding: 0;
+			}
+			ul{
+				padding-left: 1em;
+			}
+			li{
+				padding-left: 1em;
+				border: 1px solid black;
+				border-width: 0 0 1px 1px;
+			}
+			li.container{
+				border-bottom: 0px;
+			}
+			li.empty{
+				font-style: italic;
+				color: silver;
+				border-color: silver;
+			}
+			li p{
+				margin: 0;
+				background: white;
+				position: relative;
+				top: 0.5em;
+			}
+			li ul{
+				border-top: 1px solid black;
+				margin-left: -1em;
+				padding-left: 2em;
+			}
+			ul li:last-child ul{
+				border-left: 1px solid white;
+				margin-left: -17px;
+			}
+		</style>
+	</head>
+	<body>
+		<ul>
+			<li class="container"><p><a href="https://github.com/kairusds">kairusds</a></p>
+				<ul>
+					<li class="container"><p><a href="https://github.com/kairusds/tools">tools</a></p>
+						<ul id="files"></ul>
+					</li>
+				</ul>
+			<li>
+		</ul>
+		<script>
+			(async () => {
+				const data = await (await fetch("https://api.github.com/repos/kairusds/tools/commits/master")).json();
+				const ul = document.querySelector("#files");
+				for(let i = 0; i < Object.keys(data.files).length; i++){
+					const file = data.files[i].filename;
+					if(file.endsWith(".html")){
+						const p = document.createElement("p");
+						const a = document.createElement("a");
+						const li = document.createElement("li");
+						a.textContent = file;
+						a.setAttribute("href", file);
+						p.appendChild(a);
+						li.appendChild(p);
+						ul.appendChild(li);
+					}
+				}
+			})();
+		</script>
+	</body>
+</html>
