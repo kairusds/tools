@@ -8,8 +8,7 @@
 			-webkit-box-sizing: border-box;
 			-moz-box-sizing: border-box;
 			box-sizing: border-box;
-		}
-		div textarea{
+			resize: both;
 			width: 100%;
 			height: 100%;
 		}
@@ -19,7 +18,7 @@
 <h5>This converts <a href="https://tabox.co">Tabox</a> collections files to a plain text format so you can use it on <a href="https://chrome.google.com/webstore/detail/export-tabs/odafagokkafdbbeojliiojjmimakacil">Export Tabs</a>. I only made this tool because Tabox doesn't work properly on <a href="https://github.com/kiwibrowser/src">Kiwi Browser</a>.</h5>
 <div><input type="file" accept=".txt, text/plain"/></div>
 <p></p>
-<div><textarea readonly></textarea></div>
+<textarea readonly></textarea>
 <script>
 	const res = [];
 	document.querySelector(`input[type="file"]`).onchange = (event) => {
