@@ -59,16 +59,14 @@
 				const ul = document.querySelector("#files");
 				for(let i = 0; i < Object.keys(data.files).length; i++){
 					const file = data.files[i].filename;
-					if(file.endsWith(".html")){
-						const p = document.createElement("p");
-						const a = document.createElement("a");
-						const li = document.createElement("li");
-						a.textContent = file;
-						a.setAttribute("href", file);
-						p.appendChild(a);
-						li.appendChild(p);
-						ul.appendChild(li);
-					}
+					const p = document.createElement("p");
+					const a = document.createElement("a");
+					const li = document.createElement("li");
+					a.textContent = file;
+					a.setAttribute("href", file);
+					p.appendChild(a);
+					li.appendChild(p);
+					ul.appendChild(li);
 				}
 			})();
 		</script>
