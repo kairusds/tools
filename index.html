@@ -55,18 +55,22 @@
 		</ul>
 		<script>
 			(async () => {
-				const data = await (await fetch("https://api.github.com/repos/kairusds/tools/commits/master")).json();
-				const ul = document.querySelector("#files");
-				for(let i = 0; i < Object.keys(data.files).length; i++){
-					const file = data.files[i].filename;
-					const p = document.createElement("p");
-					const a = document.createElement("a");
-					const li = document.createElement("li");
-					a.textContent = file;
-					a.setAttribute("href", file);
-					p.appendChild(a);
-					li.appendChild(p);
-					ul.appendChild(li);
+				try{
+					const data = await (await fetch("https://api.github.com/repos/kairusds/tools/contents/")).json();
+					const ul = document.querySelector("#files");
+					for(let i = 0; i < Object.keys(data).length; i++){
+						const {name, path} = data[i];
+						const p = document.createElement("p");
+						const a = document.createElement("a");
+						const li = document.createElement("li");
+						a.textContent = name;
+						a.setAttribute("href", path);
+						p.appendChild(a);
+						li.appendChild(p);
+						ul.appendChild(li);
+					}
+				}catch(err){
+					alert(err);
 				}
 			})();
 		</script>
